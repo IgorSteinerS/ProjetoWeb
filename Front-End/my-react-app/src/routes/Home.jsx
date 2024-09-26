@@ -9,11 +9,11 @@ function Home() {
   return (
     <div>
       <h2>Lista de Pacientes</h2>
-      <Link to="/addpaciente">Adicionar Paciente</Link>
+      <Link className="paraPagina" to="/addpaciente">Adicionar Paciente</Link>
       <div className="pacientes-container">
         {pacientes.map((paciente) => (
           <div key={paciente.id} className="paciente-item">
-            <Link to={`/paciente/${paciente.id}`}>
+            <Link className="paraPaciente" to={`/paciente/${paciente.id}`}>
               {paciente.nome}
             </Link>
           </div>

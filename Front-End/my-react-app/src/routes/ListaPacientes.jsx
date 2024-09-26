@@ -17,11 +17,10 @@ function ListaPacientes() {
     <div>
       <h2>Detalhes do Paciente</h2>
       <p><strong>Nome:</strong> {paciente.nome}</p>
-      <p><strong>Data de Nascimento:</strong> {paciente.data}</p>
-      <p><strong>Sexo:</strong> {paciente.sexo}</p>
+      <p><strong>Data de Nascimento:</strong> {paciente.aniversario}</p>
       <p><strong>CPF:</strong> {paciente.cpf}</p>
-      <p><strong>Endereço:</strong> {paciente.endereco}</p>
-      <p><strong>Telefone:</strong> {paciente.telefone}</p>
+      <p><strong>Celular:</strong> {paciente.celular}</p>
+      <p><strong>Data da 1ª Consulta:</strong> {paciente.inicio}</p>
 
       <Link to={`/prontuario/${paciente.id}`}>
         Ver Prontuário

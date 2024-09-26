@@ -9,9 +9,12 @@ const Navbar = () => {
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link className="paraPagina" to="/">Home</Link>
         </li>
       </ul>
+      <div className="titulo">
+      <h1 className="titulo">PsyInfo</h1>
+      </div>
     </nav>
     </div>
   );

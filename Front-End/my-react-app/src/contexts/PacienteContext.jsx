@@ -9,11 +9,10 @@ export const PacienteProvider = ({ children }) => {
     const novoPaciente = {
       id: pacientes.length + 1,
       nome: paciente.nome,
-      data: paciente.data,
-      sexo: paciente.sexo,
+      aniversario: paciente.aniversario,
       cpf: paciente.cpf,
-      endereco: paciente.endereco,
-      telefone: paciente.telefone,
+      celular: paciente.celular,
+      inicio: paciente.inicio,
     };
     setPacientes([...pacientes, novoPaciente]);
   };
