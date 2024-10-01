@@ -90,12 +90,12 @@ function AddPaciente() {
     setPaciente({ ...paciente, [name]: newValue });
   };
 
-  // Submissão do formulário
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidCpf) {
       adicionarPaciente(paciente);
-      navigate('/'); // Redireciona para a página inicial
+      navigate('/'); 
     } else {
       alert('CPF inválido! Verifique os dados.');
     }

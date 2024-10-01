@@ -1,0 +1,42 @@
+.document-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    padding-top: 1rem;
+}
+
+.document-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid black; 
+    margin-bottom: 16px;
+}
+
+.document-item p {
+    margin: 5px 0; 
+}
+
+.document-item a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: blue;
+}
+
+.add-document-button-container {
+    margin-top: 20px;
+}
+
+.add-document-button {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: #c4e1fe;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+}

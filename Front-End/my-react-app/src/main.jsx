@@ -8,9 +8,12 @@ import Home from './routes/Home'
 import ListaPacientes from './routes/ListaPacientes'
 import AddPaciente from './routes/AddPaciente'
 import Prontuario from './routes/Prontuario';
-
+import EditarPaciente from './routes/EditarPaciente'
+import AddDocumento from './routes/AddDocumento'
+import EditarDocumento from './routes/EditarDocumento'
 
 import { PacienteProvider } from './contexts/PacienteContext'
+
 
 const router = createBrowserRouter([
 
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: '/prontuario/:id', 
         element: <Prontuario />,
+      },
+      {
+        path: '/editar-paciente/:id',
+        element: <EditarPaciente />,
+      },
+      {
+        path: "/adddocumento/:id",
+        element: <AddDocumento />,
+      },
+      {
+        path: "/editdocumento/:id/:index",
+        element: <EditarDocumento />, 
       },
     ]
   },

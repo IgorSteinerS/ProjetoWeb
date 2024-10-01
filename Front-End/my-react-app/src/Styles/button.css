@@ -1,0 +1,43 @@
+button {
+    padding: 5px 10px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #ff4c4c;
+  }
+  
+  a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #1e90ff;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+
+.edit {
+    color: white;
+    padding: 5px 10px;
+    background-color: yellowgreen;
+    border-radius: 4px;
+}
+
+.verProntuario {
+    color: white;
+    padding: 5px 10px;
+    background-color: #1e90ff;
+    border-radius: 4px;
+}
+
+.buttonArea {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
