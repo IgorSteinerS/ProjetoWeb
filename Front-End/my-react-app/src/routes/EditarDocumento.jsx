@@ -8,23 +8,43 @@ function EditDocumento() {
   const navigate = useNavigate();
 
   const paciente = pacientes.find(p => p.id === parseInt(id));
-  const documento = paciente?.documentos[index];
+  const documento = paciente?.documentos.find((doc) => doc.id === parseInt(index));
 
   const [nome, setNome] = useState(documento?.nome || '');
   const [dataCriacao, setDataCriacao] = useState(documento?.dataCriacao || '');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [arquivo, setArquivo] = useState(null);
+  console.log("Index recebido da URL:", index);
+console.log("Documentos do paciente:", paciente?.documentos);
+console.log("Documento selecionado:", documento);
 
-    const documentoAtualizado = {
-      ...documento,
-      nome,
-      dataCriacao,
-    };
+const handleFileChange = (e) => {
+  setArquivo(e.target.files[0]);
+};
 
-    editarDocumento(id, index, documentoAtualizado);
-    navigate(`/prontuario/${id}`); 
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!documento) {
+    console.error("Documento não encontrado!");
+    return;
+  }
+
+  const documentoAtualizado = {
+    nome,
+    dataCriacao,
   };
+
+  console.log("Dados enviados:", documentoAtualizado);
+
+  editarDocumento(documento.id, documentoAtualizado, arquivo)
+    .then(() => {
+      navigate(`/prontuario/${id}`);
+    })
+    .catch((error) => {
+      console.error("Erro ao editar documento:", error);
+    });
+};
 
   return (
     <div className="container">
@@ -38,6 +58,15 @@ function EditDocumento() {
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             required
+          />
+        </div>
+
+        <div className="item">
+          <label htmlFor="arquivo">Selecione um arquivo (opcional):</label>
+          <input
+            type="file"
+            name="arquivo"
+            onChange={handleFileChange} // Atualiza o estado quando um arquivo é selecionado
           />
         </div>
 

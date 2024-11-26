@@ -2,8 +2,11 @@ import React, { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { PacienteContext } from '../contexts/PacienteContext';
 
+
+import '../Styles/prontuario.css';
+
 function AddDocumento() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const { adicionarDocumento } = useContext(PacienteContext);
   const [nome, setNome] = useState('');
   const [arquivo, setArquivo] = useState(null);
@@ -11,10 +14,10 @@ function AddDocumento() {
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
-    setArquivo(e.target.files[0]); 
+    setArquivo(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!nome || !arquivo || !dataCriacao) {
@@ -22,16 +25,17 @@ function AddDocumento() {
       return;
     }
 
-    
-    const novoDocumento = {
-      nome,
-      arquivo: URL.createObjectURL(arquivo), 
-      dataCriacao,
-    };
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('dataCriacao', dataCriacao);
+    formData.append('arquivo', arquivo);
 
-    adicionarDocumento(id, novoDocumento); 
-
-    navigate(`/prontuario/${id}`);
+    try {
+      await adicionarDocumento(parseInt(id), formData);
+      navigate(`/prontuario/${id}`); // Redireciona para o prontuário
+    } catch (error) {
+      console.error('Erro ao adicionar documento:', error);
+    }
   };
 
   return (
@@ -65,7 +69,9 @@ function AddDocumento() {
           />
         </div>
 
-        <button type="submit">Adicionar Documento</button>
+        <button type="submit" value="upload">
+          Adicionar Documento
+        </button>
       </form>
     </div>
   );

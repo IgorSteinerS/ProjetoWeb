@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { PacienteContext } from "../contexts/PacienteContext";
-import "../Styles/prontuario.css"; // Importando o CSS atualizado
 
 function Prontuario() {
   const { id } = useParams();
-  const { pacientes, editarDocumento, deletarDocumento } = useContext(PacienteContext);
+  const { pacientes, deletarDocumento } = useContext(PacienteContext);
 
   const paciente = pacientes.find((p) => p.id === parseInt(id));
 
@@ -15,16 +14,9 @@ function Prontuario() {
 
   const documentos = paciente.documentos || [];
 
-  const handleDelete = (index) => {
+  const handleDeleteDocumento = (documentoId) => {
     if (window.confirm("Tem certeza que deseja excluir este documento?")) {
-      deletarDocumento(id, index);
-    }
-  };
-
-  const handleEdit = (docId) => {
-    const novoNome = prompt("Digite o novo nome do documento:");
-    if (novoNome) {
-      editarDocumento(paciente.id, docId, { nome: novoNome });
+      deletarDocumento(id, documentoId);
     }
   };
 
@@ -42,15 +34,17 @@ function Prontuario() {
               <p>
                 <strong>Data de Criação:</strong> {doc.dataCriacao}
               </p>
-              <a href={doc.arquivo} target="_blank" rel="noreferrer">
+              <a href={doc.caminhoArquivo} target="_blank" rel="noreferrer">
                 Ver Documento
               </a>
 
               <div className="document-actions">
-                  <Link to={`/editdocumento/${id}/${index}`}>
-                    <button>Editar</button>
-                  </Link>
-                  <button onClick={() => handleDelete(index)}>Excluir</button>
+                <Link to={`/editdocumento/${id}/${doc.id}`}>
+                  <button>Editar</button>
+                </Link>
+                <button onClick={() => handleDeleteDocumento(doc.id)}>
+                  Excluir
+                </button>
               </div>
             </li>
           ))

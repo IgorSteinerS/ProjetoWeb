@@ -7,7 +7,7 @@ import App from './App'
 import Home from './routes/Home'
 import ListaPacientes from './routes/ListaPacientes'
 import AddPaciente from './routes/AddPaciente'
-import Prontuario from './routes/Prontuario';
+import Prontuario from './routes/Prontuario'
 import EditarPaciente from './routes/EditarPaciente'
 import AddDocumento from './routes/AddDocumento'
 import EditarDocumento from './routes/EditarDocumento'
