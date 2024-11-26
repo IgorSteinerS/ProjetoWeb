@@ -10,9 +10,9 @@ Um sistema voltado para psicólogas(os), permitindo o acesso rápido e seguro à
 - Liguagens: HTML5, CSS, JavaScript 
 
 ### Back-end:
-- Linguagem: Indefinido
-- Framework: Indefinido
+- Linguagem: Java
+- Framework: Spring 
 
 
 ### Banco de Dados:
-- Indefinido
+- PostgreSQL
