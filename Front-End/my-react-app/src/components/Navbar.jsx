@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../Styles/navbar.css";
-
+import LogoutButton from './LogoutButton';
 
 const Navbar = () => {
   return (
@@ -9,6 +9,10 @@ const Navbar = () => {
     <nav>
       <ul>
         <li>
+        <LogoutButton />
+        </li>
+        <li>
+        
           <Link className="paraPagina" to="/">Home</Link>
         </li>
       </ul>
