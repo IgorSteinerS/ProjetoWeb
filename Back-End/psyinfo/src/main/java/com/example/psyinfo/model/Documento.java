@@ -15,6 +15,7 @@ public class Documento {
     private String dataCriacao;
 
     private String caminhoArquivo;
+    private String resumo;
 
     @ManyToOne
     @JoinColumn(name = "paciente_id")
@@ -58,5 +59,13 @@ public class Documento {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
     }
 }

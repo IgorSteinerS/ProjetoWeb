@@ -34,6 +34,9 @@ function Prontuario() {
               <p>
                 <strong>Data de Criação:</strong> {doc.dataCriacao}
               </p>
+              <p className="document-summary">
+                <strong>Resumo:</strong> {doc.resumo || "Sem resumo disponível"}
+              </p>
               <a href={doc.caminhoArquivo} target="_blank" rel="noreferrer">
                 Ver Documento
               </a>

@@ -1,50 +1,46 @@
-import React, { useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { PacienteContext } from '../contexts/PacienteContext';
+import React, { useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { PacienteContext } from "../contexts/PacienteContext";
 
 function EditDocumento() {
-  const { id, index } = useParams(); 
+  const { id, index } = useParams();
   const { pacientes, editarDocumento } = useContext(PacienteContext);
   const navigate = useNavigate();
 
-  const paciente = pacientes.find(p => p.id === parseInt(id));
+  const paciente = pacientes.find((p) => p.id === parseInt(id));
   const documento = paciente?.documentos.find((doc) => doc.id === parseInt(index));
 
-  const [nome, setNome] = useState(documento?.nome || '');
-  const [dataCriacao, setDataCriacao] = useState(documento?.dataCriacao || '');
-
+  const [nome, setNome] = useState(documento?.nome || "");
+  const [dataCriacao, setDataCriacao] = useState(documento?.dataCriacao || "");
+  const [resumo, setResumo] = useState(documento?.resumo || "");
   const [arquivo, setArquivo] = useState(null);
-  console.log("Index recebido da URL:", index);
-console.log("Documentos do paciente:", paciente?.documentos);
-console.log("Documento selecionado:", documento);
 
-const handleFileChange = (e) => {
-  setArquivo(e.target.files[0]);
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  if (!documento) {
-    console.error("Documento não encontrado!");
-    return;
-  }
-
-  const documentoAtualizado = {
-    nome,
-    dataCriacao,
+  const handleFileChange = (e) => {
+    setArquivo(e.target.files[0]);
   };
 
-  console.log("Dados enviados:", documentoAtualizado);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  editarDocumento(documento.id, documentoAtualizado, arquivo)
-    .then(() => {
-      navigate(`/prontuario/${id}`);
-    })
-    .catch((error) => {
-      console.error("Erro ao editar documento:", error);
-    });
-};
+    if (!documento) {
+      console.error("Documento não encontrado!");
+      return;
+    }
+
+    const documentoAtualizado = {
+      nome,
+      dataCriacao,
+      resumo,
+    };
+
+    editarDocumento(documento.id, documentoAtualizado, arquivo)
+      .then(() => {
+        navigate(`/prontuario/${id}`);
+      })
+      .catch((error) => {
+        console.error("Erro ao editar documento:", error);
+      });
+  };
 
   return (
     <div className="container">
@@ -66,7 +62,7 @@ const handleSubmit = (e) => {
           <input
             type="file"
             name="arquivo"
-            onChange={handleFileChange} // Atualiza o estado quando um arquivo é selecionado
+            onChange={handleFileChange}
           />
         </div>
 
@@ -77,6 +73,16 @@ const handleSubmit = (e) => {
             name="dataCriacao"
             value={dataCriacao}
             onChange={(e) => setDataCriacao(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="item">
+          <label htmlFor="resumo">Resumo:</label>
+          <textarea
+            name="resumo"
+            value={resumo}
+            onChange={(e) => setResumo(e.target.value)}
             required
           />
         </div>

@@ -6,11 +6,10 @@ export const PacienteContext = createContext();
 export const PacienteProvider = ({ children }) => {
   const [pacientes, setPacientes] = useState([]);
 
-  // Buscar os pacientes e documentos
   const fetchPacientes = async () => {
     try {
       const response = await axios.get('http://localhost:8080/api/pacientes', {
-        withCredentials: true, // Permite envio de cookies
+        withCredentials: true,
       });
       console.log('Resposta da API:', response.data);
 
@@ -84,11 +83,12 @@ export const PacienteProvider = ({ children }) => {
     const formData = new FormData();
     formData.append("nome", dadosAtualizados.nome);
     formData.append("dataCriacao", dadosAtualizados.dataCriacao);
-  
+    formData.append("resumo", dadosAtualizados.resumo);
+
     if (arquivo) {
       formData.append("arquivo", arquivo);
     }
-  
+
     return axios
       .put(`http://localhost:8080/api/documentos/${documentoId}`, formData, { withCredentials: true }, {
         headers: { "Content-Type": "multipart/form-data" },

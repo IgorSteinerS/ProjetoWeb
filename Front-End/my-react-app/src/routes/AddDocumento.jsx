@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { PacienteContext } from '../contexts/PacienteContext';
+import React, { useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { PacienteContext } from "../contexts/PacienteContext";
 
-
-import '../Styles/prontuario.css';
+import "../Styles/prontuario.css";
 
 function AddDocumento() {
   const { id } = useParams();
   const { adicionarDocumento } = useContext(PacienteContext);
-  const [nome, setNome] = useState('');
+  const [nome, setNome] = useState("");
   const [arquivo, setArquivo] = useState(null);
-  const [dataCriacao, setDataCriacao] = useState('');
+  const [dataCriacao, setDataCriacao] = useState("");
+  const [resumo, setResumo] = useState("");
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
@@ -20,21 +20,22 @@ function AddDocumento() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!nome || !arquivo || !dataCriacao) {
-      alert('Preencha todos os campos!');
+    if (!nome || !arquivo || !dataCriacao || !resumo) {
+      alert("Preencha todos os campos!");
       return;
     }
 
     const formData = new FormData();
-    formData.append('nome', nome);
-    formData.append('dataCriacao', dataCriacao);
-    formData.append('arquivo', arquivo);
+    formData.append("nome", nome);
+    formData.append("dataCriacao", dataCriacao);
+    formData.append("arquivo", arquivo);
+    formData.append("resumo", resumo);
 
     try {
       await adicionarDocumento(parseInt(id), formData);
       navigate(`/prontuario/${id}`); // Redireciona para o prontuário
     } catch (error) {
-      console.error('Erro ao adicionar documento:', error);
+      console.error("Erro ao adicionar documento:", error);
     }
   };
 
@@ -55,7 +56,12 @@ function AddDocumento() {
 
         <div className="item">
           <label htmlFor="arquivo">Arquivo:</label>
-          <input type="file" name="arquivo" onChange={handleFileChange} required />
+          <input
+            type="file"
+            name="arquivo"
+            onChange={handleFileChange}
+            required
+          />
         </div>
 
         <div className="item">
@@ -65,6 +71,16 @@ function AddDocumento() {
             name="dataCriacao"
             value={dataCriacao}
             onChange={(e) => setDataCriacao(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="item">
+          <label htmlFor="resumo">Resumo:</label>
+          <textarea
+            name="resumo"
+            value={resumo}
+            onChange={(e) => setResumo(e.target.value)}
             required
           />
         </div>

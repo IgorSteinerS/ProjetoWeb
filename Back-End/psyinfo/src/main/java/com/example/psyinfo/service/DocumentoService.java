@@ -22,7 +22,7 @@ public class DocumentoService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    public void salvarDocumento(MultipartFile arquivo, Paciente paciente, String nome, String dataCriacao) throws IOException {
+    public void salvarDocumento(MultipartFile arquivo, Paciente paciente, String nome, String dataCriacao,String resumo) throws IOException {
         String caminhoBase = "c:/documentos/uploads";
 
         // Verificar e criar diretório
@@ -49,6 +49,7 @@ public class DocumentoService {
         documento.setDataCriacao(dataCriacao);
         documento.setCaminhoArquivo(caminhoCompleto);
         documento.setPaciente(paciente);
+        documento.setResumo(resumo);
 
         documentoRepository.save(documento);
     }

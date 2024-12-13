@@ -40,7 +40,8 @@ public class DocumentoController {
             @PathVariable Long id,
             @RequestParam("arquivo") MultipartFile arquivo,
             @RequestParam("nome") String nome,
-            @RequestParam("dataCriacao") String dataCriacao) {
+            @RequestParam("dataCriacao") String dataCriacao,
+            @RequestParam("resumo") String resumo){
 
         if (arquivo.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Arquivo não recebido.");
@@ -76,6 +77,7 @@ public class DocumentoController {
             documento.setDataCriacao(dataCriacao);
             documento.setCaminhoArquivo(caminhoArquivo);
             documento.setPaciente(paciente);
+            documento.setResumo(resumo);
 
             documentoRepository.save(documento);
 
@@ -139,7 +141,8 @@ public class DocumentoController {
             @PathVariable("id") Long documentoId,
             @RequestParam(value = "nome", required = false) String nome,
             @RequestParam(value = "dataCriacao", required = false) String dataCriacao,
-            @RequestParam(value = "arquivo", required = false) MultipartFile arquivo) {
+            @RequestParam(value = "arquivo", required = false) MultipartFile arquivo,
+            @RequestParam(value = "resumo", required = false) String resumo) {
 
         try {
             // Buscar o documento pelo ID
@@ -152,6 +155,9 @@ public class DocumentoController {
             }
             if (dataCriacao != null && !dataCriacao.isEmpty()) {
                 documento.setDataCriacao(dataCriacao);
+            }
+            if (resumo != null && !resumo.isEmpty()) {
+                documento.setResumo(resumo);
             }
 
             // Verificar se foi enviado um novo arquivo
